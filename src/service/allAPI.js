@@ -14,3 +14,13 @@ export const getDataAPI =async(id)=>{
 export const  allDataAPI = async()=>{
     return await commonAPI("GET",`${BASEURL}/all-data`)
 }
+//Update Data
+export const updateDataAPI = async (id, reqBody) => {
+  return await commonAPI("PUT", `${BASEURL}/all-data/${id}`, reqBody);
+};
+
+
+// Delete Data
+export const deleteAllData = async(id)=> {
+    return await commonAPI("delete",`${BASEURL}/all-data/${id}`)
+}

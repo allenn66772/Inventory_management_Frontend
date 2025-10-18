@@ -18,7 +18,7 @@ function Addproduct() {
       quantity:'',
       vendor:'',
       location:'',
-      // unit:''
+      category:''
     }
   })
 
@@ -28,7 +28,8 @@ function Addproduct() {
         product:'',
         quantity:'',
         vendor:'',
-        location:''
+        location:'',
+        category:''
       }
 
     });
@@ -64,7 +65,9 @@ function Addproduct() {
         backgroundColor: '#f9f9f9',
       }}
     >
+        <h1 className='text-2xl font-bold mb-2'>Add Your Products here</h1>
       <Grid container spacing={2}>
+      
         {/* Product Name */}
         <Grid item xs={12} sm={6}>
           <TextField value={userInput.productDetails.product}onChange={(e) =>
@@ -134,8 +137,28 @@ function Addproduct() {
           />
         </Grid>
 
+        {/* category */}
+
+
+             <Grid item xs={12} sm={6}>
+          <TextField value={userInput.productDetails.category} onChange={(e) =>
+  setUserInput({
+    ...userInput,
+    productDetails: {
+      ...userInput.productDetails,
+      category: e.target.value,
+    },
+  })
+}
+            fullWidth
+            label="Category"
+            variant="outlined"
+            type="text"
+          />
+        </Grid>
+
         {/* Select Dropdown */}
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
@@ -144,12 +167,14 @@ function Addproduct() {
               label="Category"
               defaultValue=""
             >
-              <MenuItem value={10}>gram</MenuItem>
-              <MenuItem value={20}>Kilogram</MenuItem>
+              <MenuItem value={Electronics} >Electronics</MenuItem>
+              <MenuItem  value={Furniture}>Furniture</MenuItem>
+              <MenuItem value={Vegetables&Fruits}>Vegetables&Fruits</MenuItem>
+              <MenuItem value={Clothes}>Clothes</MenuItem>
              
             </Select>
           </FormControl>
-        </Grid>
+        </Grid> */}
 
         {/* Submit Button */}
         <Grid item xs={12}>
