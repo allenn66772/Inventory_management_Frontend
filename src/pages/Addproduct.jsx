@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { addDataAPI } from '../service/allAPI';
+import { Link } from 'react-router-dom';
 
 
 function Addproduct() {
@@ -48,7 +49,9 @@ function Addproduct() {
 
   return (
     <>
-    
+    <Link to={"/addedproducts"} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold">
+            Get Started
+          </Link>
         <Box
       component="section"
       sx={{

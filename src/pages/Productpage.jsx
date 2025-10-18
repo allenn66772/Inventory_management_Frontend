@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Paper,
-  Button,
-  Typography,
-  Grid,
-  Container,
-} from "@mui/material";
+import { Box, Paper, Button, Typography, Grid, Container } from "@mui/material";
 import { allDataAPI } from "../service/allAPI";
 
 function Productpage() {
-  // Correct state: should be an array
   const [userData, setUserData] = useState([]);
 
-  // Fetch all products
+  // Fetch all data
   const getAllData = async () => {
     try {
       const result = await allDataAPI();
-      console.log("Fetched data:", result); // Inspect structure
+      console.log("Raw API result:", result);
 
-      if (result.status === 200 ) {
-        console.log(result.data[0].product)
-        setUserData(result.data); // Adjust this line if structure is different
+      if (result.status === 200) {
+        // console.log("Fetched data:", JSON.stringify(result.data, null, 2));
+        setUserData(result.data);
       } else {
         alert("Network error while fetching data");
       }
@@ -44,6 +36,7 @@ function Productpage() {
         </Typography>
 
         <Box sx={{ textAlign: "right", mb: 2 }}>
+          
           <Button
             variant="outlined"
             component={Link}
@@ -60,25 +53,23 @@ function Productpage() {
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Paper elevation={4} sx={{ p: 3, height: "100%" }}>
                   <Typography variant="h6" gutterBottom>
-                    {item.productDetails?.product || "Unnamed Product"}
+                    {item.product || "Unnamed Product"}
                   </Typography>
                   <Typography variant="body1">
-                    <strong>Quantity:</strong>{" "}
-                    {item.productDetails?.quantity || "N/A"}
+                    <strong>Quantity:</strong> {item.quantity || "N/A"}
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Vendor:</strong>{" "}
-                    {item.productDetails?.vendor || "N/A"}
+                    <strong>Vendor:</strong> {item.vendor || "N/A"}
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    <strong>Location:</strong>{" "}
-                    {item.productDetails?.location || "N/A"}
+                    <strong>Location:</strong> {item.location || "N/A"}
                   </Typography>
 
                   <Box sx={{ mt: 3 }}>
-                    <Button variant="outlined" fullWidth>
-                      Download
-                    </Button>
+                    <div className="flex gap-4">
+                      <Button sx={{backgroundColor:"yellow",color:"black"}} variant="contained">Edit</Button>
+                      <Button sx={{backgroundColor:"red"}} variant="contained">Delete</Button>
+                    </div>
                   </Box>
                 </Paper>
               </Grid>

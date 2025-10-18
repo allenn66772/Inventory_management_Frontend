@@ -18,7 +18,7 @@ function Landingpage() {
         Track your products, suppliers, and stock levels in real-time.
         Manage everything efficiently from one dashboard.
       </p>
-      <Link to={"/addproduct"} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold">
+      <Link to={"/add"} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold">
         Get Started
       </Link>
     </div>

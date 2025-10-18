@@ -1,6 +1,7 @@
 import commonAPI from "./commonAPI"
 import BASEURL from "./serviceURL" 
 
+
 //ADD data
 export const addDataAPI= async(reqBody)=>{
     return await commonAPI("POST",`${BASEURL}/all-data`,reqBody)
