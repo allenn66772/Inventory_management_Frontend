@@ -1,196 +1,223 @@
-import React, { useState } from 'react'
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import { addDataAPI } from '../service/allAPI';
-import { Link } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { addDataAPI } from "../service/allAPI";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Button } from "@mui/material";
 
 function Addproduct() {
-  const [userInput,setUserInput]= useState({
-    productDetails:{
-      product:'',
-      quantity:'',
-      vendor:'',
-      location:'',
-      category:''
-    }
-  })
+  const [userInput, setUserInput] = useState({
+    productDetails: {
+      product: "",
+      quantity: "",
+      vendor: "",
+      location: "",
+      category: "",
+    },
+  });
 
-  const handleReset =() => {
+  const handleReset = () => {
     setUserInput({
-      productDetails:{
-        product:'',
-        quantity:'',
-        vendor:'',
-        location:'',
-        category:''
-      }
-
+      productDetails: {
+        product: "",
+        quantity: "",
+        vendor: "",
+        location: "",
+        category: "",
+      },
     });
-  }
+  };
 
- const addProduct = async () => {
-  const {product,quantity,vendor,location}=userInput.productDetails
-  if (product && quantity && vendor && location ){
-    const result =await addDataAPI(userInput.productDetails)
-    console.log(result);
-    handleReset()
-    
-  }else{
-    alert("error")
-  }
- }
-
+  const addProduct = async () => {
+    const { product, quantity, vendor, location } = userInput.productDetails;
+    if (product && quantity && vendor && location) {
+      const result = await addDataAPI(userInput.productDetails);
+      console.log(result);
+      Swal.fire({
+        title: "",
+        text: "Data Added Successfully",
+        icon: "success",
+      });
+      handleReset();
+    } else {
+      Swal.fire({
+        icon: "error",   
+      title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
+  };
 
   return (
     <>
-    <Link to={"/addedproducts"} className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold">
-            Get Started
-          </Link>
-        <Box
-      component="section"
-      sx={{
-        p: 3,
-        border: '1px dashed grey',
-        borderRadius: 2,
-        maxWidth: 600,
-        margin: 'auto',
-        mt: 4,
-        backgroundColor: '#f9f9f9',
-      }}
-    >
-        <h1 className='text-2xl font-bold mb-2'>Add Your Products here</h1>
-      <Grid container spacing={2}>
-      
-        {/* Product Name */}
-        <Grid item xs={12} sm={6}>
-          <TextField value={userInput.productDetails.product}onChange={(e) =>
-  setUserInput({
-    ...userInput,
-    productDetails: {
-      ...userInput.productDetails,
-      product: e.target.value,
-    },
-  })
-}
-            fullWidth
-            label="Product Name"
-            variant="outlined"
-          />
-        </Grid>
+      <div
+        className=" min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-6"
+        style={{
+          backgroundImage:
+            'url("https://euristiq.com/wp-content/webp-express/webp-images/uploads/2023/10/guide-to-automated-inventory-management.png.webp")',
+        }}
+      >
+        {/* Background overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-        {/* Quantity */}
-        <Grid item xs={12} sm={6}>
-          <TextField value={userInput.productDetails.quantity} onChange={(e) =>
-  setUserInput({
-    ...userInput,
-    productDetails: {
-      ...userInput.productDetails,
-      quantity: e.target.value,
-    },
-  })
-}
-            fullWidth
-            label="Quantity"
-            variant="outlined"
-            type="number"
-          />
-        </Grid>
+        {/* Form Card */}
+        <div className="relative z-10 w-full max-w-5xl bg-white/20 backdrop-blur-md rounded-2xl shadow-2xl p-10">
+          <h1 className="text-3xl font-bold text-center text-white mb-2">
+            Add Your Product
+          </h1>
+          <p className="text-white text-center mb-8">
+            Fill in the product details below to add them to your inventory.
+          </p>
 
-        {/* Vendor */}
-        <Grid item xs={12} sm={6}>
-          <TextField value={userInput.productDetails.vendor}onChange={(e) =>
-  setUserInput({
-    ...userInput,
-    productDetails: {
-      ...userInput.productDetails,
-      vendor: e.target.value,
-    },
-  })
-}
-            fullWidth
-            label="Vendor"
-            variant="outlined"
-          />
-        </Grid>
-
-        {/* Location */}
-        <Grid item xs={12} sm={6}>
-          <TextField value={userInput.productDetails.location}onChange={(e) =>
-  setUserInput({
-    ...userInput,
-    productDetails: {
-      ...userInput.productDetails,
-      location: e.target.value,
-    },
-  })
-}
-            fullWidth
-            label="Location"
-            variant="outlined"
-          />
-        </Grid>
-
-        {/* category */}
-
-
-             <Grid item xs={12} sm={6}>
-          <TextField value={userInput.productDetails.category} onChange={(e) =>
-  setUserInput({
-    ...userInput,
-    productDetails: {
-      ...userInput.productDetails,
-      category: e.target.value,
-    },
-  })
-}
-            fullWidth
-            label="Category"
-            variant="outlined"
-            type="text"
-          />
-        </Grid>
-
-        {/* Select Dropdown */}
-        {/* <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Category"
-              defaultValue=""
-            >
-              <MenuItem value={Electronics} >Electronics</MenuItem>
-              <MenuItem  value={Furniture}>Furniture</MenuItem>
-              <MenuItem value={Vegetables&Fruits}>Vegetables&Fruits</MenuItem>
-              <MenuItem value={Clothes}>Clothes</MenuItem>
-             
-            </Select>
-          </FormControl>
-        </Grid> */}
-
-        {/* Submit Button */}
-        <Grid item xs={12}>
-          <Button onClick={addProduct}
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 1 }}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addProduct();
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           >
-            Add Product
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
+            {/* Product Name */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-white">
+                Product Name
+              </label>
+              <input
+                type="text"
+                value={userInput.productDetails.product}
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    productDetails: {
+                      ...userInput.productDetails,
+                      product: e.target.value,
+                    },
+                  })
+                }
+                className="placeholder-white text-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter product name"
+               
+              />
+            </div>
+
+            {/* Quantity */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-white">
+                Quantity
+              </label>
+              <input
+                type="number"
+                value={userInput.productDetails.quantity}
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    productDetails: {
+                      ...userInput.productDetails,
+                      quantity: e.target.value,
+                    },
+                  })
+                }
+                className="placeholder-white text-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter quantity"
+                
+              />
+            </div>
+
+            {/* Vendor */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-white">
+                Vendor
+              </label>
+              <input
+                type="text"
+                value={userInput.productDetails.vendor}
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    productDetails: {
+                      ...userInput.productDetails,
+                      vendor: e.target.value,
+                    },
+                  })
+                }
+                className="placeholder-white text-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Vendor name"
+                
+              />
+            </div>
+
+            {/* Location */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-white">
+                Location
+              </label>
+              <input
+                type="text"
+                value={userInput.productDetails.location}
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    productDetails: {
+                      ...userInput.productDetails,
+                      location: e.target.value,
+                    },
+                  })
+                }
+                className="placeholder-white text-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter location"
+              
+              />
+            </div>
+
+            {/* Category — full width row */}
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-semibold mb-1 text-white">
+                Category
+              </label>
+              <input
+                type="text"
+                value={userInput.productDetails.category}
+                onChange={(e) =>
+                  setUserInput({
+                    ...userInput,
+                    productDetails: {
+                      ...userInput.productDetails,
+                      category: e.target.value,
+                    },
+                  })
+                }
+                className="placeholder-white text-white w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter category"
+               
+              />
+            </div>
+
+            {/* Buttons — full width row */}
+            <div className="sm:col-span-2 flex flex-col sm:flex-row gap-4 mt-4">
+              <button
+                type="submit"
+                className="w-full sm:w-1/2 bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 hover:scale-105 transition-all"
+              >
+                Add Product
+              </button>
+
+              <Link
+                to="/addedproducts"
+                className=" bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold"
+              >
+                 Products
+              </Link>
+              <Link
+                to={"/"}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold"
+              >
+                Back To Home
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default Addproduct
+export default Addproduct;

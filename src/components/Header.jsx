@@ -1,39 +1,20 @@
-import React from 'react'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
+import React from "react";
+import { Link, Links } from "react-router-dom";
 
 function Header() {
   return (
     <>
-    
-     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
-    
-    
+      {/* Hover Button (Top Right) */}
+      <div className="w-full bg-gray-800 flex items-center justify-between px-6 py-3">
+        {/* Logo / Title */}
+        <h1 className="text-3xl md:text-4xl font-bold text-white">
+          InventoryPro
+        </h1>
+
+       
+      </div>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

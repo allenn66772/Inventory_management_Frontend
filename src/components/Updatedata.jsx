@@ -16,29 +16,31 @@ const style = {
 };
 
 function Updatedata({ open, handleClose, productData, refreshData }) {
-  const [formData, setFormData] = useState({
-    product: "",
-    quantity: "",
-    vendor: "",
-    location: "",
-    category: "",
-  });
+ const [userInput,setUserInput]= useState({
+     productDetails:{
+       product:'',
+       quantity:'',
+       vendor:'',
+       location:'',
+       category:''
+     }
+   })
 
   // 🧠 Whenever productData changes, bind it to formData
   useEffect(() => {
     if (productData) {
-      setFormData(productData);
+      setUserInput(productData);
     }
   }, [productData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setUserInput({ ...userInput, [name]: value });
   };
 
   const handleUpdate = async () => {
     try {
-      const result = await updateDataAPI(formData._id, formData);
+      const result = await updateDataAPI(userInput.id, userInput);
       console.log("Updated successfully:", result);
       refreshData(); // reload list after update
       handleClose();
@@ -65,7 +67,7 @@ function Updatedata({ open, handleClose, productData, refreshData }) {
           margin="normal"
           label="Product Name"
           name="product"
-          value={formData.product}
+          value={userInput.product}
           onChange={handleChange}
         />
         <TextField
@@ -73,7 +75,7 @@ function Updatedata({ open, handleClose, productData, refreshData }) {
           margin="normal"
           label="Quantity"
           name="quantity"
-          value={formData.quantity}
+          value={userInput.quantity}
           onChange={handleChange}
         />
         <TextField
@@ -81,7 +83,7 @@ function Updatedata({ open, handleClose, productData, refreshData }) {
           margin="normal"
           label="Vendor"
           name="vendor"
-          value={formData.vendor}
+          value={userInput.vendor}
           onChange={handleChange}
         />
         <TextField
@@ -89,7 +91,7 @@ function Updatedata({ open, handleClose, productData, refreshData }) {
           margin="normal"
           label="Location"
           name="location"
-          value={formData.location}
+          value={userInput.location}
           onChange={handleChange}
         />
         <TextField
@@ -97,7 +99,7 @@ function Updatedata({ open, handleClose, productData, refreshData }) {
           margin="normal"
           label="Category"
           name="category"
-          value={formData.category}
+          value={userInput.category}
           onChange={handleChange}
         />
 
