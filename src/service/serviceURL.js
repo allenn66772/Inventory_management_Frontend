@@ -1,4 +1,4 @@
-const BASEURL="http://localhost:3000"
+const BASEURL="https://inventory-management-backend-o7he.onrender.com"
 
 
 
