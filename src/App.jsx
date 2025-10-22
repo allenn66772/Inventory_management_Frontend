@@ -7,7 +7,7 @@ import Addproduct from './pages/Addproduct'
 
 import Productpage from './pages/Productpage'
 import Pagenotfound from './pages/Pagenotfound'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
     <Header/>
-  <BrowserRouter>
+  
     <Routes>
     <Route path='/' element={<Landingpage/>}/>
     <Route path='error' element={<Pagenotfound/>}/>
@@ -37,7 +37,7 @@ function App() {
     </Routes>
   
   
-  </BrowserRouter>
+ 
 
       <Footer/>
     </>
